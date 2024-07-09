@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My_library</string>
+    <string name="no_data">Нет книг</string>
+    <string name="add_new_book">Добавить новую книгу</string>
+    <string name="published_date">Год публикации</string>
+    <string name="publisher">Издательство</string>
+    <string name="book_author">Автор книги</string>
+    <string name="book_title">Название книги</string>
+    <string name="delete_book">Удалить книгу</string>
+    <string name="update_information_about_book">Обновить информацию о книге</string>
+    <string name="delete_all_books">Удалить все книги</string>
+    <string name="warningFillFields">Все поля должны быть заполнены</string>
+    <string name="check_the_date">Проверьте дату</string>
+    <string name="book_added">Новая книга добавлена</string>
+    <string name="backToMain">Назад</string>
+    <string name="camera">Камера</string>
+    <string name="examplebradhendersen">BradHendersen</string>
+    <string name="example_android_developers_handbook">Android Developers HandBook</string>
+    <string name="example_1">1</string>
+    <string name="example_java_edition">Java Edition</string>
+    <string name="example_2015">2015</string>
+    <string name="no_books">Нет книг</string>
+    <string name="failed">Неудачно</string>
+    <string name="success">Книга успешно добавлена!</string>
+    <string name="failed_delete">Не удалось удалить.</string>
+    <string name="success_delete">Книга успешно удалена.</string>
+    <string name="success_update">Информация о книге успешно обновлена.</string>
+    <string name="error">Ошибка при добавлении книги в базу данных.</string>
+</resources>

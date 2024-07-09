@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">My_library</string>
+    <string name="no_data">No Books</string>
+    <string name="add_new_book">Add new Book</string>
+    <string name="published_date">Published_date</string>
+    <string name="publisher">Publisher</string>
+    <string name="book_author">Book Author</string>
+    <string name="book_title">Book Title</string>
+    <string name="delete_book">Delete Book</string>
+    <string name="update_information_about_book">Update information about Book</string>
+    <string name="delete_all_books">Delete all Books</string>
+    <string name="warningFillFields">All fields must be filled out, please check all fields</string>
+    <string name="check_the_date">Please check the date</string>
+    <string name="book_added">New book is added</string>
+    <string name="backToMain">Back</string>
+    <string name="camera">Camera</string>
+    <string name="examplebradhendersen">BradHendersen</string>
+    <string name="example_android_developers_handbook">Android Developers HandBook</string>
+    <string name="example_1">1</string>
+    <string name="example_java_edition">Java Edition</string>
+    <string name="example_2015">2015</string>
+    <string name="no_books">No Books</string>
+    <string name="failed">Failed</string>
+    <string name="success">Book Added Successfully!</string>
+    <string name="failed_delete">Failed to delete.</string>
+    <string name="success_delete">Book successfully deleted.</string>
+    <string name="success_update">Books information updated successfully!</string>
+    <string name="error">Error while trying to add book to database</string>
+</resources>
