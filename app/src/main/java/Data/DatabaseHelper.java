@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
-    //Создадим таблицу
+    //Create a table
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        //Для того чтобы поймать исключения, прпищем try/catch
+        //catch the exception try/catch
         try {
             cv.put(KEY_TITLE, title);
             cv.put(KEY_AUTHOR, author);
@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             long result = db.insert(TABLE_NAME, null, cv);
 
             if (result == -1) {
-                //Всплывающее сообщение на короткий промежуток времени, ссылаемся на файл строковых ресурсов
+                //Pop-up message for a short period of time, refer to the string resource file
                 Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show();
@@ -78,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //Для чтения всех книг
+    //To read all books
     public Cursor readAllBooks(){
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //Для обновления информации о книге
+    //To update book information
     public void updateBookData(String row_id, String title, String author, String publisher, String published_date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -108,7 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //Для удаления одной книги
+    //To delete one book
     public void deleteOneBook(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
@@ -119,7 +119,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //Для удаления всех книг
+    //To delete all books
     public void deleteAllBooks(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
