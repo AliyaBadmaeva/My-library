@@ -19,7 +19,7 @@ public class AddBookActivity extends AppCompatActivity {
     Button add_button;
     Button backToMain;
     private static final int pic_id = 123;
-    // Определим переменную типа кнопка и изображение.
+    // Let's define a variable of type button and image.
     Button camera_open_id;
     ImageView click_image_id;
 
@@ -27,7 +27,7 @@ public class AddBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
-        // По идентификатору мы можем получить каждый компонент, идентификатор которого присвоен в XML-файле, получить кнопки и изображение.
+        // Using identifier we can get each component whose identifier is assigned in the XML file, get buttons and an image.
         title_input = findViewById(R.id.title_input);
         author_input = findViewById(R.id.author_input);
         publisher_input = findViewById(R.id.publisher_input);
@@ -38,7 +38,7 @@ public class AddBookActivity extends AppCompatActivity {
         click_image_id = findViewById(R.id.click_image);
 
         db = DatabaseHelper.getInstance(this.getApplicationContext());
-        //Добавляем слушатель при нажатии на кнопку add_button (добавиь книгу)
+        //Add a listener when the user click on the add_button button (add a book)
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,65 +50,65 @@ public class AddBookActivity extends AppCompatActivity {
 
                 int pubdate = 0;
                 try {
-                    //Задаем проверки на пустоту
+                    //Checking for emptiness
                     if (author.isEmpty() && publisher.isEmpty() && title.isEmpty() && published_date.isEmpty()) {
-                        //Всплывающее окно, если в строках пусто
+                        //Popup window if rows are empty
                         Toast.makeText(getApplicationContext(), R.string.warningFillFields, Toast.LENGTH_SHORT).show();
                         return;
-                        //Если дата равна нулю, то нужно проверить дату
+                        //If the date is null then the user needs to check the date
                     } else if (pubdate == Integer.parseInt(published_date)) {
                         Toast.makeText(getApplicationContext(), R.string.check_the_date, Toast.LENGTH_SHORT).show();
                         return;
-                        //Есои длина даты короче 2 цифр, то нужно проверить правильность ввода даты
+                        //If the date length is shorter than 2 digits, then the user needs to check that the date is entered correctly
                     } else if (published_date.length() != 4) {
                         Toast.makeText(getApplicationContext(), R.string.check_the_date, Toast.LENGTH_SHORT).show();
                         return;
-                        //Если год больше, чем текущий, нужно проверить дату
+                        //If the year is greater than the current one, the user needs to check the date
                     } else if (Integer.parseInt(published_date) > Calendar.getInstance().get(Calendar.YEAR)) {
                         Toast.makeText(getApplicationContext(), R.string.check_the_date, Toast.LENGTH_SHORT).show();
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    published_date = ""; // это приведет к сбою проверки параметров заказанного количества и всплывающему сообщению
+                    published_date = ""; // this will result in a failure to check the parameters of the ordered quantity and a pop-up message
                     Toast.makeText(getApplicationContext(), R.string.check_the_date, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 db.addBook(title, author, publisher, Integer.parseInt(published_date));
-                //Если все хорошо, то во всплывающем окне будет надпись об успешности добавления книги
+                //If all is well, a pop-up window will indicate that the book was added successfully.
                 Toast.makeText(getApplicationContext(), R.string.book_added, Toast.LENGTH_SHORT).show();
-                //Сделаем строки после добавления книги пустыми
+                //Let's make the lines after adding a book empty
                 title_input.setText("");
                 author_input.setText("");
                 publisher_input.setText("");
                 published_date_input.setText("");
             }
         });
-        //Кнопка для возврата на главную страницу, пропишем слушатель
+        //Button to return to the main page, let's add a listener here
         backToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        // Кнопка Camera_open предназначена для открытия камеры и добавления setOnClickListener в эту кнопку.
+        // The Camera_open button is for opening the camera and adding a setOnClickListener to that button.
         camera_open_id.setOnClickListener(v -> {
-//            // Создадим намерение камеры ACTION_IMAGE_CAPTURE, оно откроет камеру для захвата изображения.
+//            // Let's create an ACTION_IMAGE_CAPTURE camera intent, which will open the camera to capture an image.
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            // Запустим действие с помощью camera_intent и запросим идентификатор изображения.
+            // Let's launch the action using camera_intent and request the image ID.
             startActivityForResult(camera_intent, pic_id);
         });
     }
 
     @Override
-//    // Этот метод поможет получить изображение
+//    // This method will help us get an image
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-//        // Сопоставим идентификатор изображения запроса с кодом запроса.
+//        // Let's match the request image identifier with the request code.
 //
         if (requestCode == pic_id) {
-//            // BitMap — это структура данных файла изображения, которая хранит изображение в памяти.
+//            // BitMap — It is an image file data structure that stores the image in memory.
             Bitmap photo = (Bitmap) intent.getExtras().get("data");
-//            // Установим изображение в imageview для отображения
+//            // Set the image to imageview for display
             click_image_id.setImageBitmap(photo);
         }
 
