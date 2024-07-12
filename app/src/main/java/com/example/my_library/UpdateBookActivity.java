@@ -17,7 +17,7 @@ import Data.DatabaseHelper;
 
 public class UpdateBookActivity extends AppCompatActivity {
 
-    //Идентифицируем базу данных, поля для редактирования текста, кнопки и строки
+    //Database identification, text editing fields, buttons and rows
     DatabaseHelper db;
     EditText title_input, author_input, publisher_input, published_date_input;
     Button update_button, delete_button, back_button;
@@ -36,10 +36,10 @@ public class UpdateBookActivity extends AppCompatActivity {
         delete_button = findViewById(R.id.delete);
         back_button = findViewById(R.id.Comeback);
 
-        //Сначала мы вызываем
+        //First we call
         getAndSetIntentData();
 
-        //Установим заголовок панели действий после метода getAndSetIntentData
+        //Set the title of the action bar after the getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(title);
@@ -74,13 +74,13 @@ public class UpdateBookActivity extends AppCompatActivity {
     void getAndSetIntentData(){
         if(getIntent().hasExtra("id") && getIntent().hasExtra("title") &&
                 getIntent().hasExtra("author") && getIntent().hasExtra("publisher") && getIntent().hasExtra("published_date")){
-            //Получение данных из намерения (интента)
+            //Receiving data from intent
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
             author = getIntent().getStringExtra("author");
             publisher = getIntent().getStringExtra("publisher");
             published_date = getIntent().getStringExtra("published_date");
-            //установка данных для интента
+            //setting data for intent
             title_input.setText(title);
             author_input.setText(author);
             publisher_input.setText(publisher);
