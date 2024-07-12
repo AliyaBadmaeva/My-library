@@ -1,4 +1,4 @@
-//импорт классов из других пакетов, функциональность которых используется в MainActivity
+//importing classes from other packages whose functionality is used in MainActivity
 package com.example.my_library;
 
 import androidx.annotation.Nullable;
@@ -25,13 +25,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import Data.DatabaseHelper;
 
-//Определение класса
-/*MainActivity наследуется от класса AppCompatActivity, который выше подключен с помощью директивы
-импорта. Класс AppCompatActivity по сути представляет отдельный экран (страницу) приложения или его
-визуальный интерфейс. И MainActivity наследует весь этот функционал
+//Class Definition
+/*MainActivity inherits from the AppCompatActivity class, which is connected above using the directive
+import. The AppCompatActivity class essentially represents a single screen (page) of an application or its
+visual interface. And MainActivity inherits all this functionality
  */
 public class MainActivity extends AppCompatActivity {
-    //Определяем переменные, кнопки, изображения, адаптер для Recycler View, а также текстовые поля
+    //Definition of variables, buttons, images, adapter for Recycler View, and text fields
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     ImageView empty_imageview;
@@ -40,30 +40,30 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> book_id, book_title, book_author, book_publisher, book_published_date;
     BookAdapter bookAdapter;
 
-    //MainActivity содержит только один метод onCreate(), в котором фактически и создается весь интерфейс приложения
+    //MainActivity contains only one method onCreate(), in which the entire application interface is actually created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //В метод setContentView() передается ресурс разметки графического интерфейса
+        //The GUI layout resource is passed to the setContentView() method
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
         add_button = findViewById(R.id.add_button);
         empty_imageview = findViewById(R.id.empty_imageview);
         no_books = findViewById(R.id.no_data);
-        //Добавляем слушатель при нажатии на кнопку add_button (добавиь книгу)
+        //Add a listener when the user clicks on the add_button button (add a book)
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Создаем интент(намерение), чтобы перейти из текущей главной активность в активность AddBookActivity
+                //Create an intent to move from the current main activity to the activity AddBookActivity
                 Intent intent = new Intent(MainActivity.this, AddBookActivity.class);
-                // запуск activity
+                // start of activity
                 startActivity(intent);
             }
         });
 
         db = DatabaseHelper.getInstance(MainActivity.this);
-        //Создаем списки
+        //Creating lists
         book_id = new ArrayList<>();
         book_title = new ArrayList<>();
         book_author = new ArrayList<>();
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        // создаем адаптер
+        // create an adapter
         bookAdapter = new BookAdapter(MainActivity.this,this, book_id, book_title, book_author,
                 book_publisher, book_published_date);
-        // устанавливаем для списка адаптер
+        // install an adapter for the list
         recyclerView.setAdapter(bookAdapter);
-        //LinearLayoutManager: упорядочивает элементы в виде списка с одной колонкой
+        //LinearLayoutManager: arranges items in a single-column list
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
     }
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     void storeDataInArrays(){
         Cursor cursor = db.readAllBooks();
         if(cursor.getCount() == 0){
-            //Картинка и текст, что книг нет становится видимой, если нет книг в списке
+            //The picture and text that there are no books becomes visible if there are no books in the list
             empty_imageview.setVisibility(View.VISIBLE);
             no_books.setVisibility(View.VISIBLE);
         }else{
@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
                 book_publisher.add(cursor.getString(3));
                 book_published_date.add(cursor.getString(4));
             }
-            // Картинка и TextView об отсуствии книг сттановится невидимой, если книги в списке есть
+            // The picture and TextView about the absence of books becomes invisible if there are books in the list
             empty_imageview.setVisibility(View.GONE);
             no_books.setVisibility(View.GONE);
         }
     }
 
-    //Меню
+    //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -121,18 +121,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.delete_all_books){
-            //Вызываем диалог для подтверждения
+            //Call a dialog to confirm
             confirmDialog();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    //Алертный диалог для удаления всех книг
+    //Alert dialog for deleting all books
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete all books?");
         builder.setMessage("Are you sure you want to delete all Books?");
-        //Для положительного ответа
+        //For a positive answer
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        //Для отрицательного ответа
+        //For a negative answer
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
